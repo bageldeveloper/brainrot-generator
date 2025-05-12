@@ -14,17 +14,18 @@ def create_video(input_folder, output_folder):
     # Create TextClip for each subtitle
     subtitle_clips = []
     for i, line in enumerate(subtitles_lines):
-        caption_clip = TextClip(text=line.strip(), font="arial", font_size=24, color="yellow", bg_color="black")
-        caption_clip = caption_clip.set_position("center", "bottom")
-        caption_clip = caption_clip.set_duration(video_clip.duration / len(subtitles_lines))
-        caption_clip = caption_clip.set_start(i * (video_clip.duration / len(subtitles_lines)))
+        # bg_color = "black",
+        caption_clip = TextClip(text=line.strip(), font="impact", font_size=48, color="white", stroke_color = "black", stroke_width=2, method="caption", size=(1000, None))
+        caption_clip = caption_clip.with_position("center", "center")
+        caption_clip = caption_clip.with_duration(video_clip.duration / len(subtitles_lines))
+        caption_clip = caption_clip.with_start(i * (video_clip.duration / len(subtitles_lines)))
         subtitle_clips.append(caption_clip)
 
     # Combine all caption clips into a single CompositeVideoClip
     subtitles = CompositeVideoClip(subtitle_clips)
 
     # Overlay subtitles at the bottom of the video
-    final_clip = CompositeVideoClip([video_clip, subtitles.set_position(("center", "bottom"))])
+    final_clip = CompositeVideoClip([video_clip, subtitles.with_position(("center", "bottom"))])
 
     # Write the final video
     output_path = os.path.join(output_folder, "output_video.mp4")
