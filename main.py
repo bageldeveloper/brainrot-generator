@@ -30,7 +30,7 @@ with model.chat_session():
     # Generate AI response, limited to ~250 tokens and 1000 characters max in prompt instructions
     response = model.generate(
         personality +
-    "\n\nTopic: " + story + "\n\n",
+    "\n\nTopic: " + story + "(keep the story under 256 characters)\n\n",
         max_tokens=256,
         temp=1
     )

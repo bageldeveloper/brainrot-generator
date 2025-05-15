@@ -9,6 +9,7 @@ from moviepy import (
 import os
 from speech import generate_speech_from_file  # Your gTTS + MP3 duration generator
 import csv
+import random
 
 def create_video(input_folder, output_folder):
     # Target resolution (portrait)
@@ -76,7 +77,8 @@ def create_video(input_folder, output_folder):
         current_start += duration
 
     # Load background music if available
-    bg_music_path = os.path.join(input_folder, "music.mp3")
+    randomNum = str(random.randint(1, 4))
+    bg_music_path = os.path.join(input_folder, "music" + randomNum + ".mp3")
     if os.path.exists(bg_music_path):
         background_music = AudioFileClip(bg_music_path).with_duration(video_clip.duration)
         combined_audio = CompositeAudioClip(audio_clips + [background_music])
@@ -90,3 +92,7 @@ def create_video(input_folder, output_folder):
     os.makedirs(output_folder, exist_ok=True)
     output_path = os.path.join(output_folder, "output_video.mp4")
     final_video.write_videofile(output_path, codec="libx264", audio_codec="aac", fps=24)
+
+input_folder = "videos"
+output_folder = "output"
+create_video(input_folder, output_folder)
