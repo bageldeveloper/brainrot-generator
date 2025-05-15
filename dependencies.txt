@@ -1,0 +1,4 @@
+moviepy
+gpt4all
+mutagen
+gTTS
