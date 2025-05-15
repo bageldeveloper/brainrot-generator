@@ -48,6 +48,7 @@ def create_video(input_folder, output_folder):
 
     for i, (sentence, duration) in enumerate(zip(subtitle_sentences, mp3_durations)):
         words = sentence.split()
+        duration-=0.5
         chunks = [" ".join(words[j:j + 2]) for j in range(0, len(words), 2)]
 
         chunk_start = current_start
