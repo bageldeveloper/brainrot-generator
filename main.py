@@ -33,7 +33,7 @@ with model.chat_session():
     "\n\nTopic: " + story + "(keep the story under 256 characters)\n\n",
         max_tokens=256,
         temp=1
-    )
+    ) + "\nRemember to like and subscribe!"
     print(response)
 
     # Split response into sentences for subtitles
